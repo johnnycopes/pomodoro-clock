@@ -1,0 +1,105 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  background: #E6E6E6;
+  color: #1A1A1A;
+  font-family: "Hind", 'sans-serif';
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+main {
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+}
+
+button {
+  border: none;
+  border-radius: 5px;
+  font-family: "Hind", 'sans-serif';
+  outline: none;
+}
+
+.btn {
+  border: none;
+  border-radius: 5px;
+  font-family: "Hind", 'sans-serif';
+  outline: none;
+}
+
+.container {
+  width: 70%;
+  max-width: 960px;
+  margin: 0 auto;
+  height: 100%;
+}
+
+.timer {
+  flex-basis: 2;
+}
+
+.section {
+  flex-basis: 10rem;
+}
+
+.title {
+  margin: 0 auto 3rem;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.title h3 {
+  font-weight: 400;
+}
+
+.title h1 {
+  padding: 0;
+}
+
+.length {
+  margin: 0;
+  font-size: 2.5em;
+  display: inline-block;
+  padding: 0 10px;
+}
+
+.small-btn {
+  background: white;
+  text-align: center;
+  display: inline-block;
+  width: 30px;
+  font-size: 2rem;
+}
+
+.display {
+  display: block;
+  margin: 0 auto;
+  width: 300px;
+  font-size: 5em;
+  font-weight: 600;
+  background: #4AA842;
+}
+
+.reset {
+  display: block;
+  margin: 25px auto;
+  padding: 10px;
+  width: 200px;
+  background: #ED5151;
+  font-size: 2em;
+}
