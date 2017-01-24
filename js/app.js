@@ -1,15 +1,17 @@
 // buttons
 const sessionIncrease = document.querySelector(".session-increase");
 const sessionDecrease = document.querySelector(".session-decrease");
+const sessionDisplay = document.querySelector(".session-display");
 const breakIncrease = document.querySelector(".break-increase");
-const breakDecrease =document.querySelector(".break-decrease");
-const display = document.querySelector(".display");
+const breakDecrease = document.querySelector(".break-decrease");
+const breakDisplay = document.querySelector(".break-display");
 const reset = document.querySelector(".reset");
 
+const timer = document.querySelector(".timer-display");
+const timerMinutes = document.querySelector(".minutes");
+const timerSeconds = document.querySelector(".seconds");
 
-sessionIncrease.addEventListener('click', function() {
-  console.log('hey');
-});
+let intervalID;
   // number values
 // var sessionValue = document.getElementById("session-value"),
     // breakValue = document.getElementById("break-value");
@@ -28,41 +30,44 @@ sessionIncrease.addEventListener('click', function() {
 
 //}
 
-// Make the buttons do a given task when clicked
+reset.addEventListener("click", function() {
+  window.clearInterval(intervalID);
+  sessionDisplay.innerHTML = 5;
+  breakDisplay.innerHTML = 5;
+  timer.innerHTML = 25;
+});
 
-  // Session length increase/decrease
-// sessionIncrease.addEventListener("click", function(){
-//   sessionValue.innerHTML = parseInt(sessionValue.innerHTML, 10) + 1;
-//   display.value = parseInt(display.value, 10) + 1;
-// });
-// sessionDecrease.addEventListener("click", function(){
-//   sessionValue.innerHTML = parseInt(sessionValue.innerHTML, 10) - 1;
-//   display.value = parseInt(display.value, 10) - 1;
-// });
-//
-//   // Break length increase/decrease
-// breakIncrease.addEventListener("click", function(){
-//   breakValue.innerHTML = parseInt(breakValue.innerHTML, 10) + 1;
-// });
-//
-// breakDecrease.addEventListener("click", function(){
-//   breakValue.innerHTML = parseInt(breakValue.innerHTML, 10) - 1;
-// });
+sessionIncrease.addEventListener("click", function(){
+  sessionDisplay.innerHTML = parseInt(sessionDisplay.innerHTML, 10) + 1;
+  timerMinutes.innerHTML = sessionDisplay.innerHTML;
+});
+sessionDecrease.addEventListener("click", function(){
+  sessionDisplay.innerHTML = parseInt(sessionDisplay.innerHTML, 10) - 1;
+  timerMinutes.innerHTML = sessionDisplay.innerHTML;
+});
+
+breakIncrease.addEventListener("click", function(){
+  breakDisplay.innerHTML = parseInt(breakDisplay.innerHTML, 10) + 1;
+});
+breakDecrease.addEventListener("click", function(){
+  breakDisplay.innerHTML = parseInt(breakDisplay.innerHTML, 10) - 1;
+});
 
   // Start/pause the timer
-display.addEventListener("click", function(){
-  var timer = parseInt(display.value, 10);
-  var testInterval = setInterval(function(){
-    // check if the timer has hit 0 seconds
-    if (timer <= 0) {
-    // clear the timer
-      clearInterval(testInterval);
-    // indication for the user that the timer is up
-      alert("Time's up!");
-    } else {
-    // if the timer is greater than 0, increment it negatively
-      timer--;
+timer.addEventListener("click", function() {
+  if (intervalID) {
+    window.clearInterval(intervalID);
+  }
+  let time = parseInt(timerMinutes.innerHTML, 10) * 60;
+  intervalID = window.setInterval(function decreaseTimer(){
+    time--;
+    timerMinutes.innerHTML = Math.floor((time / 60) % 1000);
+    timerSeconds.innerHTML = time % 60;
+    if (time >= 0) {
+      console.log('hey');
     }
-     // the second parameter of the function setInterval is the       number of millisecods. this is the amount of time between         executing the above code in the function. 1000ms = 1s
+    else {
+      window.clearInterval(intervalID);
+    }
   }, 1000);
 });

@@ -14,27 +14,28 @@
     <div class="container">
         <div class="title">
             <h3 class="johnnycopes">johnnycopes</h3>
-            <h1 class="title">Pomodoro Clock</h1>
+            <h1 class="title">Pomodoro Timer</h1>
         </div>
 
         <main>
-            <div class="session-block section">
+            <div class="session-block section cf">
                 <h4>Session length:</h4>
-                <button class="small-btn session-decrease">-</button>
-                <div class="length session-value">25</div>
-                <button class="small-btn session-increase">+</button>
+                <button class="small-btn session-decrease fl">-</button>
+                <div class="length session-display">25</div>
+                <button class="small-btn session-increase fr">+</button>
             </div>
 
             <div class="timer">
-                <button class="display">25</button>
+                <button class="timer-display">
+                  <span class="minutes">25</span>:<span class="seconds">00</span></button>
                 <button class="reset">Reset</button>
             </div>
 
-            <div class="break-block section">
+            <div class="break-block section cf">
                 <h4>Break length:</h4>
-                <button class="small-btn break-decrease">-</button>
-                <div class="length break-value">5</div>
-                <button class="small-btn break-increase">+</button>
+                <button class="small-btn break-decrease fl">-</button>
+                <div class="length break-display">5</div>
+                <button class="small-btn break-increase fr">+</button>
             </div>
         </main>
     </div>
