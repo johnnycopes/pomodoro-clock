@@ -12,23 +12,6 @@ const timerMinutes = document.querySelector(".minutes");
 const timerSeconds = document.querySelector(".seconds");
 
 let intervalID;
-  // number values
-// var sessionValue = document.getElementById("session-value"),
-    // breakValue = document.getElementById("break-value");
-
-// Define functions
-
-//  // matches the display value to the value of session length
-//function displaySession() {
-//  parseInt(displayValue, 10);
-//  if ()
-//}
-//
-//function displayBreak() {
-//
-//}
-
-//}
 
 reset.addEventListener("click", function() {
   window.clearInterval(intervalID);
