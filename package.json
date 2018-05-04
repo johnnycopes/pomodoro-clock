@@ -1,0 +1,29 @@
+{
+  "name": "pomodoro-clock",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel ./index.html -p 4200 --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johnnycopes/pomodoro-clock.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/johnnycopes/pomodoro-clock/issues"
+  },
+  "homepage": "https://github.com/johnnycopes/pomodoro-clock#readme",
+  "devDependencies": {
+    "parcel": "^1.8.1"
+  },
+  "dependencies": {
+    "autoprefixer": "^8.4.1",
+    "babel-preset-env": "^1.6.1",
+    "node-sass": "^4.9.0",
+    "postcss-modules": "^1.1.0"
+  }
+}
