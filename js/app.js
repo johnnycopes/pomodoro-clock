@@ -1,56 +1,39 @@
-// // buttons
-// const sessionIncrease = document.querySelector(".session-increase");
-// const sessionDecrease = document.querySelector(".session-decrease");
-// const sessionDisplay = document.querySelector(".session-display");
-// const breakIncrease = document.querySelector(".break-increase");
-// const breakDecrease = document.querySelector(".break-decrease");
-// const breakDisplay = document.querySelector(".break-display");
-// const reset = document.querySelector(".reset");
+const sessionInput = document.querySelector('#session');
+const breakInput = document.querySelector('#break');
+const playbackFlowBtn = document.querySelector('.playback__button-flow');
+const playbackResetBtn = document.querySelector('.playback__button-reset');
 
-// const timer = document.querySelector(".timer-display");
-// const timerMinutes = document.querySelector(".minutes");
-// const timerSeconds = document.querySelector(".seconds");
+let sessionTimer = {
+  time: minutesToMilliseconds(25),
+  interval: null,
+  isRunning: false
+};
 
-// let intervalID;
+let breakTimer = {
+  time: minutesToMilliseconds(5),
+  interval: null,
+  isRunning: false
+};
 
-// reset.addEventListener("click", function() {
-//   window.clearInterval(intervalID);
-//   sessionDisplay.innerHTML = 5;
-//   breakDisplay.innerHTML = 5;
-//   timer.innerHTML = 25;
-// });
+playbackFlowBtn.addEventListener('click', () => toggleTimer(sessionTimer));
 
-// sessionIncrease.addEventListener("click", function(){
-//   sessionDisplay.innerHTML = parseInt(sessionDisplay.innerHTML, 10) + 1;
-//   timerMinutes.innerHTML = sessionDisplay.innerHTML;
-// });
-// sessionDecrease.addEventListener("click", function(){
-//   sessionDisplay.innerHTML = parseInt(sessionDisplay.innerHTML, 10) - 1;
-//   timerMinutes.innerHTML = sessionDisplay.innerHTML;
-// });
+function toggleTimer(timer) {
+  timer.isRunning = !timer.isRunning;
+  timer.isRunning ? startTimer(timer) : stopTimer(timer);
+}
 
-// breakIncrease.addEventListener("click", function(){
-//   breakDisplay.innerHTML = parseInt(breakDisplay.innerHTML, 10) + 1;
-// });
-// breakDecrease.addEventListener("click", function(){
-//   breakDisplay.innerHTML = parseInt(breakDisplay.innerHTML, 10) - 1;
-// });
+function startTimer(timer) {
+  timer.interval = setInterval(() => {
+    timer.time -= 1000;
+    console.log(timer.time);
+  }, 1000);
+}
 
-//   // Start/pause the timer
-// timer.addEventListener("click", function() {
-//   if (intervalID) {
-//     window.clearInterval(intervalID);
-//   }
-//   let time = parseInt(timerMinutes.innerHTML, 10) * 60;
-//   intervalID = window.setInterval(function decreaseTimer(){
-//     time--;
-//     timerMinutes.innerHTML = Math.floor((time / 60) % 1000);
-//     timerSeconds.innerHTML = time % 60;
-//     if (time >= 0) {
-//       console.log('hey');
-//     }
-//     else {
-//       window.clearInterval(intervalID);
-//     }
-//   }, 1000);
-// });
+function stopTimer(timer) {
+  console.log('stop!');
+  clearInterval(timer.interval);
+}
+
+function minutesToMilliseconds(minutes) {
+  return minutes * 60 * 1000;
+}
