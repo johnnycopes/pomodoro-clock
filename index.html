@@ -2,42 +2,45 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pomodoro Timer</title>
-    <link href="https://fonts.googleapis.com/css?family=Hind:300,400,500" rel="stylesheet">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Pomodoro Timer</title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9"
+	 crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Nixie+One" rel="stylesheet">
 </head>
 
 <body>
-    <div class="container">
-        <div class="title">
-            <h3 class="johnnycopes">johnnycopes</h3>
-            <h1 class="title">Pomodoro Timer</h1>
-        </div>
+	<main class="app">
+		<section class="title">
+			<h1>Pomodoro Timer</h1>
+		</section>
+		<section class="timer app__display">
+			<span class="timer__display timer__minutes">25</span>
+			<span class="timer__display timer__colon">:</span>
+			<span class="timer__display timer__seconds">00</span>
+		</section>
+		<section class="signature">
+			<h4>made by johnnycopes</h4>
+		</section>
+		<section class="session app__input">
+			<label for="session">Session length:</label>
+			<input id="session" type="number" value="25" min="10" max="60" />
+		</section>
+		<section class="playback app__input">
+			<button class="playback__button playback__button-flow">
+				<i class="fas fa-play"></i>
+			</button>
+			<button class="playback__button playback__button-reset">
+				<i class="fas fa-sync-alt"></i>
+			</button>
+		</section>
+		<section class="break app__input">
+			<label for="break">Break length:</label>
+			<input id="break" type="number" value="5" min="2" max="15" />
+		</section>
+	</main>
 
-        <main>
-            <div class="session-block section cf">
-                <h4>Session length:</h4>
-                <button class="small-btn session-decrease fl">-</button>
-                <div class="length session-display">25</div>
-                <button class="small-btn session-increase fr">+</button>
-            </div>
-
-            <div class="timer">
-                <button class="timer-display">
-                  <span class="minutes">25</span>:<span class="seconds">00</span></button>
-                <button class="reset">Reset</button>
-            </div>
-
-            <div class="break-block section cf">
-                <h4>Break length:</h4>
-                <button class="small-btn break-decrease fl">-</button>
-                <div class="length break-display">5</div>
-                <button class="small-btn break-increase fr">+</button>
-            </div>
-        </main>
-    </div>
-
-    <script src="./index.js"></script>
+	<script src="./index.js"></script>
 </body>
 </html>
