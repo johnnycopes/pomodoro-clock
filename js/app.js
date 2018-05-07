@@ -1,39 +1,90 @@
-const sessionInput = document.querySelector('#session');
-const breakInput = document.querySelector('#break');
-const playbackFlowBtn = document.querySelector('.playback__button-flow');
-const playbackResetBtn = document.querySelector('.playback__button-reset');
+const App = app();
+const UI = ui(App);
+App.init();
 
-let sessionTimer = {
-  time: minutesToMilliseconds(25),
-  interval: null,
-  isRunning: false
-};
+// TODO: split these two modules into separate files
 
-let breakTimer = {
-  time: minutesToMilliseconds(5),
-  interval: null,
-  isRunning: false
-};
+function app() {
+	let sessionTimer;
+	let breakTimer;
+	
+	return {
+		init,
+		onFlowClick,
+		onResetClick
+	};
 
-playbackFlowBtn.addEventListener('click', () => toggleTimer(sessionTimer));
+	function init() {
+		sessionTimer = resetTimer(25);
+		breakTimer = resetTimer(5);
+	}
 
-function toggleTimer(timer) {
-  timer.isRunning = !timer.isRunning;
-  timer.isRunning ? startTimer(timer) : stopTimer(timer);
+	function onFlowClick() {
+		sessionTimer.isRunning = !sessionTimer.isRunning;
+		sessionTimer.isRunning ? startTimer(sessionTimer) : stopTimer(sessionTimer);
+	}
+
+	function onResetClick() {
+		sessionTimer = resetTimer(25);
+		breakTimer = resetTimer(5);
+		console.log('reset');
+		console.log(sessionTimer);
+	}
+
+	function resetTimer(minutes) {
+		let newTimer = {
+			time: minutesToMilliseconds(minutes),
+			interval: null,
+			isRunning: false
+		};
+		return newTimer;
+	}
+
+	function toggleTimer() {
+		if (sessionTimer.time > 0) {
+			sessionTimer.isRunning = !sessionTimer.isRunning;
+			sessionTimer.isRunning ? startTimer(sessionTimer) : stopTimer(sessionTimer);
+		}
+	}
+
+	function startTimer(timer) {
+		timer.interval = setInterval(() => {
+			timer.time -= 1000;
+			console.log(timer.time);
+		}, 1000);
+	}
+
+	function stopTimer(timer) {
+		console.log('stop!');
+		clearInterval(timer.interval);
+	}
+
+	function minutesToMilliseconds(minutes) {
+		return minutes * 60 * 1000;
+	}
 }
 
-function startTimer(timer) {
-  timer.interval = setInterval(() => {
-    timer.time -= 1000;
-    console.log(timer.time);
-  }, 1000);
-}
+function ui(app) {
+	const sessionInput = document.querySelector('#session');
+	const breakInput = document.querySelector('#break');
+	const playbackFlowBtn = document.querySelector('.playback__button-flow');
+	const playbackFlowIcon = document.querySelector('.playback__button-flow-icon')
+	const playbackResetBtn = document.querySelector('.playback__button-reset');
 
-function stopTimer(timer) {
-  console.log('stop!');
-  clearInterval(timer.interval);
-}
+	playbackFlowBtn.addEventListener('click', onFlowClick);
+	playbackResetBtn.addEventListener('click', app.onResetClick);
 
-function minutesToMilliseconds(minutes) {
-  return minutes * 60 * 1000;
+	function onFlowClick() {
+		playbackFlowBtn.classList.toggle('playback__button-flow--start');
+		playbackFlowBtn.classList.toggle('playback__button-flow--pause');
+		playbackFlowIcon.classList.toggle('fa-play');
+		playbackFlowIcon.classList.toggle('fa-pause');
+		playbackResetBtn.classList.toggle('playback__button-reset--disabled');
+		playbackResetBtn.disabled = !playbackResetBtn.disabled;
+		app.onFlowClick();
+	}
+
+	function onResetClick() {
+		app.onResetClick();
+	}
 }

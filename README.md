@@ -5,7 +5,8 @@
 #### Goals of this project:
 
 - Use Parcel as module bundler for assets
-- Try out CSS custom properties (variables)
+- Make a sweet layout with CSS Grid + SCSS
+- Leverage the revealing module pattern to structure logic
 
 #### Local installation:
 

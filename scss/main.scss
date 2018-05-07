@@ -1,12 +1,4 @@
-// COLORS
-
-:root {
-  --background: rgb(255, 255, 255);
-  --text: #1B9AAA;
-  --start: #06D6A0;
-  --pause: #EF476F;
-  --border-radius: 15px;
-}
+@import 'variables';
 
 * {
   box-sizing: border-box;
@@ -17,8 +9,8 @@ html {
 }
 
 body {
-  color: var(--text);
-  background: var(--background);
+  color: $text;
+  background: $background;
   font-family: 'Nixie One', 'sans-serif';
   font-size: 1rem;
   line-height: 1.5;
@@ -35,7 +27,7 @@ body {
 
   &__input {
     input {
-      color: var(--text);
+      color: $text;
       font-size: 2rem;
       width: 100%;
       border: 0;
@@ -86,16 +78,47 @@ body {
     padding: 1rem;
     border: none;
     outline: 0;
-    border-radius: var(--border-radius);
+    border-radius: $border-radius;
     
     &-flow {
-      color: var(--background);
-      background: var(--start);
-      margin-bottom: 1rem;
+			margin-bottom: 1rem;
+			color: $background;
+			transition: $fast-transition;
+			
+			&--start {
+				background: $start;
+
+				&:hover {
+					background: darken($start, 5%);
+				}
+			}
+
+			&--pause {
+				background: $pause;
+
+				&:hover {
+					background: darken($pause, 5%);
+				}
+			}
     }
 
     &-reset {
-      color: var(--text);
+			color: $text;
+			background: $background;
+			transition: $fast-transition;
+
+			&:hover {
+				color: darken($text, 5%);
+			}
+
+			&--disabled {
+				cursor: not-allowed;
+				color: lightgray; // TODO: add disabled to colors list
+
+				&:hover {
+					color: lightgray;
+				}
+			}
     }
   }
 }
