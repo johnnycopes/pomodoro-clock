@@ -13,7 +13,7 @@ body {
   background: $background;
   font-family: 'Nixie One', 'sans-serif';
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1.2;
   height: 100vh;
 }
 
@@ -26,15 +26,18 @@ body {
   justify-items: center;
 
   &__input {
+
     input {
       color: $text;
       font-size: 2rem;
       width: 100%;
-      border: 0;
+			border: 0;
+			transition: $fast-transition;
     }
 
     label {
-      display: block;
+			display: block;
+			text-align: center;
     }
   }
 }
@@ -46,12 +49,23 @@ body {
 }
 
 .timer {
-  grid-row: 2;
-  grid-column: 1;
-
-  &__display {
-    font-size: 15rem;
-  }
+	grid-row: 2;
+	grid-column: 1;
+	font-family: 'IBM Plex Mono', 'sans-serif';
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	
+	&__session {
+		display: flex;
+		font-size: 15rem;
+	}
+	
+	&__break {
+		display: flex;
+		font-size: 5rem;
+	}
 }
 
 .signature {
@@ -61,7 +75,12 @@ body {
 
 .session {
   grid-row: 1;
-  grid-column: 2;
+	grid-column: 2;
+
+	&__wrapper {
+		display: flex;
+		justify-content: center;
+	}
 }
 
 .playback {

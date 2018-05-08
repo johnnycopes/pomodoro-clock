@@ -7,7 +7,7 @@
 	<title>Pomodoro Timer</title>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9"
 	 crossorigin="anonymous">
-	<link href="https://fonts.googleapis.com/css?family=Nixie+One" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:300|Nixie+One" rel="stylesheet">
 </head>
 
 <body>
@@ -15,19 +15,26 @@
 		<section class="title">
 			<h1>Pomodoro Timer</h1>
 		</section>
-		<section class="timer app__display">
-			<span class="timer__display timer__minutes">25</span>
-			<span class="timer__display timer__colon">:</span>
-			<span class="timer__display timer__seconds">00</span>
+		<section class="timer">
+			<div class="timer__session">
+				<span class="timer__session-value timer__session-minutes">25</span>
+				<span class="timer__session-value timer__session-colon">:</span>
+				<span class="timer__session-value timer__session-seconds">00</span>
+			</div>
+			<div class="timer__break">
+				<span class="timer__break-value timer__break-minutes">5</span>
+				<span class="timer__break-value timer__break-colon">:</span>
+				<span class="timer__break-value timer__break-seconds">00</span>
+			</div>
 		</section>
 		<section class="signature">
 			<h4>made by johnnycopes</h4>
 		</section>
-		<section class="session app__input">
+		<section class="app__input session">
 			<label for="session">Session length:</label>
-			<input id="session" type="number" value="25" min="10" max="60" />
+			<input id="session" type="number" value="25" min="10" step="1" max="60" />
 		</section>
-		<section class="playback app__input">
+		<section class="playback">
 			<button class="playback__button playback__button-flow playback__button-flow--start">
 				<i class="playback__button-flow-icon fas fa-play"></i>
 			</button>
@@ -35,9 +42,9 @@
 				<i class="fas fa-sync-alt"></i>
 			</button>
 		</section>
-		<section class="break app__input">
+		<section class="app__input break">
 			<label for="break">Break length:</label>
-			<input id="break" type="number" value="5" min="2" max="15" />
+			<input id="break" type="number" value="5" min="1" max="30" />
 		</section>
 	</main>
 
