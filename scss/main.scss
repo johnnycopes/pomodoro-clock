@@ -65,6 +65,11 @@ body {
 	&__break {
 		display: flex;
 		font-size: 5rem;
+		opacity: 0.3;
+	}
+
+	&__round {
+		font-size: 2rem;
 	}
 }
 

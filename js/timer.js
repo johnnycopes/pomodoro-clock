@@ -1,8 +1,10 @@
 export function timer() {
-	const sessionMinutes = document.querySelector('.timer__session-minutes');
-	const sessionSeconds = document.querySelector('.timer__session-seconds');
-	const breakMinutes = document.querySelector('.timer__break-minutes');
-	const breakSeconds = document.querySelector('.timer__break-seconds');
+	const $round = document.querySelector('.timer__round-number');
+	const $sessionMinutes = document.querySelector('.timer__session-minutes');
+	const $sessionSeconds = document.querySelector('.timer__session-seconds');
+	const $breakMinutes = document.querySelector('.timer__break-minutes');
+	const $breakSeconds = document.querySelector('.timer__break-seconds');
+	let round = 1;
 	let sessionTimer;
 	let breakTimer;
 	let sessionLength;
@@ -19,22 +21,31 @@ export function timer() {
 	// =======================
 
 	function init() {
-		sessionLength = 25;
-		breakLength = 5;
-		sessionTimer = setNewTimer(sessionLength);
-		breakTimer = setNewTimer(breakLength);
+		sessionLength = 0.05;
+		breakLength = 0.05;
+		resetTimer();
+		resetRound();
 	}
 
 	function toggleFlow() {
-		sessionTimer.isRunning = !sessionTimer.isRunning;
-		sessionTimer.isRunning ? startTimer(sessionTimer) : stopTimer(sessionTimer);
+		if (sessionTimer.milliseconds > 0) {
+			toggleTimer(sessionTimer);
+		}
+		else if (breakTimer.milliseconds > 0) {
+			toggleTimer(breakTimer);
+		}
+		else {
+			resetTimer();
+			incrementRound();
+			toggleFlow();
+		}
 	}
 
 	function resetTimer() {
-		sessionTimer = setNewTimer(sessionLength);
-		breakTimer = setNewTimer(breakLength);
-		updateTimerUI(sessionTimer, sessionMinutes, sessionSeconds);
-		updateTimerUI(breakTimer, breakMinutes, breakSeconds);
+		sessionTimer = setNewTimer(sessionLength, $sessionMinutes, $sessionSeconds);
+		breakTimer = setNewTimer(breakLength, $breakMinutes, $breakSeconds);
+		updateTimerUI(sessionTimer);
+		updateTimerUI(breakTimer);
 	}
 
 	function changeSession(minutes) {
@@ -49,19 +60,30 @@ export function timer() {
 	
 	// -----------------------
 
-	function setNewTimer(minutes) {
+	function setNewTimer(minutes, minutesElement, secondsElement) {
 		let newTimer = {
-			milliseconds: minsToMs(minutes),
+			milliseconds: convertMinsToMs(minutes),
 			interval: null,
-			isRunning: false
+			isRunning: false,
+			minutesElement,
+			secondsElement
 		};
 		return newTimer;
+	}
+
+	function toggleTimer(timer) {
+		timer.isRunning = !timer.isRunning;
+		timer.isRunning ? startTimer(timer) : stopTimer(timer);
 	}
 
 	function startTimer(timer) {
 		timer.interval = setInterval(() => {
 			timer.milliseconds -= 1000;
-			updateTimerUI(sessionTimer, sessionMinutes, sessionSeconds);
+			updateTimerUI(timer);
+			if (timer.milliseconds <= 0) {
+				toggleTimer(timer);
+				toggleFlow();
+			}
 		}, 1000);
 	}
 
@@ -69,19 +91,33 @@ export function timer() {
 		clearInterval(timer.interval);
 	}
 
-	function minsToMs(minutes) {
+	function convertMinsToMs(minutes) {
 		return minutes * 60 * 1000;
 	}
 
-	function msToMinsAndSecs(milliseconds) {
+	function convertMsToMinsAndSecs(milliseconds) {
 		let minutes = Math.floor(milliseconds / 1000 / 60);
 		let seconds = milliseconds / 1000 - (60 * minutes);
 		return {minutes, seconds};
 	}
 
-	function updateTimerUI(timer, minutesElement, secondsElement) {
-		const {minutes, seconds} = msToMinsAndSecs(timer.milliseconds);
-		minutesElement.innerHTML = minutes.toString().padStart(2, 0);
-		secondsElement.innerHTML = seconds.toString().padEnd(2, 0);
+	function updateElementUI(element, value) {
+		element.innerHTML = value.toString().padStart(2, 0);
+	}
+
+	function resetRound() {
+		round = 1;
+		updateElementUI($round, round);
+	}
+
+	function incrementRound() {
+		round++;
+		updateElementUI($round, round);
+	}
+
+	function updateTimerUI(timer) {
+		const {minutes, seconds} = convertMsToMinsAndSecs(timer.milliseconds);
+		updateElementUI(timer.minutesElement, minutes);
+		updateElementUI(timer.secondsElement, seconds);
 	}
 }
