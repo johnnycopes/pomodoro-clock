@@ -1,38 +1,99 @@
 @import 'variables';
 
-* {
-  box-sizing: border-box;
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
 }
 
 html {
-  font-size: 100%;
+  font-size: 10px;
 }
 
 body {
   color: $text;
   background: $background;
-  font-family: 'Nixie One', 'sans-serif';
-  font-size: 1rem;
+  font-family: $sans-serif;
+	font-size: 3rem;
+	font-weight: 300;
   line-height: 1.2;
   height: 100vh;
+	position: relative;
 }
 
 .app {
-  display: grid;
+	display: grid;
   grid-template-rows: 25% 50% 25%;
   grid-template-columns: 2fr 1fr;
   height: 100%;
   align-items: center;
-  justify-items: center;
+	justify-items: center;
+	border: $border-width solid $text;
+	
+	&__icon {
+		position: absolute;
+		top: $edge-spacing;
+		left: $edge-spacing;
+		font-size: 4rem;
+		z-index: 2;
+		opacity: 0.5;
+		transition: $medium;
+
+		&:hover {
+			opacity: 1;
+		}
+
+		&:hover ~ .app__panel {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			transform: translateX(0);
+			visibility: visible;
+			opacity: 1;
+		}
+	}
+
+	&__panel {
+		position: absolute;
+		height: 100vh;
+		width: 40vw;
+		top: 0;
+		left: 0;
+		z-index: 1;
+		transition: $medium;
+		transform: translateX(-100%);
+		visibility: hidden;
+		opacity: 0;
+		background: $background;
+	}
+
+	&__signature {
+		position: absolute;
+		z-index: 1;
+		writing-mode: vertical-lr;
+		left: $edge-spacing;
+		bottom: $edge-spacing;
+		font-size: 2rem;
+		color: rgba($text, 0.5);
+		transition: $fast;
+		text-decoration: none;
+
+		&:hover {
+			color: $text;
+		}
+	}
 
   &__input {
-
     input {
-      color: $text;
-      font-size: 2rem;
+			color: $text;
+			font-family: $monospace;
+      font-size: 5rem;
       width: 100%;
 			border: 0;
-			transition: $fast-transition;
+			transition: $fast;
+			text-align: center;
+			padding: 1rem 0;
+			border-radius: $border-radius;
     }
 
     label {
@@ -45,31 +106,44 @@ body {
 .title {
   grid-row: 1;
   grid-column: 1;
-  font-size: 3rem;
+	font-size: 7rem;
+	font-family: $sans-serif;
+
 }
 
 .timer {
 	grid-row: 2;
 	grid-column: 1;
-	font-family: 'IBM Plex Mono', 'sans-serif';
+	font-family: $monospace;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	font-size: 10rem;
+	color: rgba($text, 0.5);
 	
-	&__session {
-		display: flex;
-		font-size: 15rem;
+	&--current {
+		color: $text;
 	}
+
+	&--running {
+		transform: scale(1.5);
+	}
+
 	
+	&__session,
 	&__break {
 		display: flex;
-		font-size: 5rem;
-		opacity: 0.3;
+		transition: $medium;
 	}
 
 	&__round {
-		font-size: 2rem;
+		font-size: 5rem;
+
+		&-number {
+			font-family: $monospace;
+			font-weight: 400;
+		}
 	}
 }
 
@@ -97,9 +171,9 @@ body {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 4rem;
-    width: 8rem;
-    padding: 1rem;
+    font-size: 8rem;
+    width: 16rem;
+    padding: 2rem;
     border: none;
     outline: 0;
     border-radius: $border-radius;
@@ -107,7 +181,7 @@ body {
     &-flow {
 			margin-bottom: 1rem;
 			color: $background;
-			transition: $fast-transition;
+			transition: $fast;
 			
 			&--start {
 				background: $start;
@@ -129,7 +203,7 @@ body {
     &-reset {
 			color: $text;
 			background: $background;
-			transition: $fast-transition;
+			transition: $fast;
 
 			&:hover {
 				color: darken($text, 5%);

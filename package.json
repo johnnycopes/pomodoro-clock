@@ -1,5 +1,5 @@
 {
-  "name": "pomodoro-clock",
+  "name": "pomodoro-timer",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/johnnycopes/pomodoro-clock.git"
+    "url": "git+https://github.com/johnnycopes/pomodoro-timer.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/johnnycopes/pomodoro-clock/issues"
+    "url": "https://github.com/johnnycopes/pomodoro-timer/issues"
   },
-  "homepage": "https://github.com/johnnycopes/pomodoro-clock#readme",
+  "homepage": "https://github.com/johnnycopes/pomodoro-timer#readme",
   "devDependencies": {
     "parcel": "^1.8.1"
   },

@@ -7,31 +7,42 @@
 	<title>Pomodoro Timer</title>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9"
 	 crossorigin="anonymous">
-	<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:300|Nixie+One" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:200,300,400|Scope+One" rel="stylesheet">
 </head>
 
 <body>
 	<main class="app">
+		<i class="app__icon fas fa-question"></i>
+		<a class="app__signature" href="http://www.johnnycopes.com/" target="_blank">made by johnnycopes</a>
+		<section class="app__panel">
+			<p>todo:<br>
+				- sub out color for lightgray disabled<br>
+				- gradient borders (during playback would be cool)<br>
+				- write copy for this panel<br>
+				- box shadow during panel slide
+				- better authentication for number inputs
+			</p>
+		</section>
 		<section class="title">
 			<h1>Pomodoro Timer</h1>
 		</section>
 		<section class="timer">
 			<div class="timer__session">
-				<span class="timer__session-value timer__session-minutes"></span>
+				<span class="timer__session-value timer__session-minutes minutes"></span>
 				<span class="timer__session-value timer__session-colon">:</span>
-				<span class="timer__session-value timer__session-seconds"></span>
+				<span class="timer__session-value timer__session-seconds seconds"></span>
 			</div>
 			<div class="timer__break">
-				<span class="timer__break-value timer__break-minutes"></span>
+				<span class="timer__break-value timer__break-minutes minutes"></span>
 				<span class="timer__break-value timer__break-colon">:</span>
-				<span class="timer__break-value timer__break-seconds"></span>
+				<span class="timer__break-value timer__break-seconds seconds"></span>
 			</div>
 		</section>
 		<section class="timer__round">
 			<h2>Round <span class="timer__round-number"></span></h2>
 		</section>
 		<section class="app__input session">
-			<label for="session">Session length:</label>
+			<label for="session">session length:</label>
 			<input id="session" type="number" value="25" min="10" step="1" max="60" />
 		</section>
 		<section class="playback">
@@ -43,10 +54,9 @@
 			</button>
 		</section>
 		<section class="app__input break">
-			<label for="break">Break length:</label>
+			<label for="break">break length:</label>
 			<input id="break" type="number" value="5" min="1" max="30" />
 		</section>
-		<!-- <h4 class="signature">made by johnnycopes</h4> -->
 	</main>
 
 	<script src="./index.js"></script>
