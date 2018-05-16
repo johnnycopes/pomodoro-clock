@@ -19,8 +19,6 @@ export function timer() {
 	// =======================
 
 	function init() {
-		sessionLength = 25;
-		breakLength = 5;
 		resetTimer();
 		resetRound();
 	}
@@ -28,13 +26,13 @@ export function timer() {
 	function toggleFlow() {
 		if (sessionTimer.milliseconds > 0) {
 			toggleTimer(sessionTimer);
-			updateCurrentTimerUI(sessionTimer, true);
-			updateCurrentTimerUI(breakTimer, false);
+			setCurrentTimer(sessionTimer, true);
+			setCurrentTimer(breakTimer, false);
 		}
 		else if (breakTimer.milliseconds > 0) {
 			toggleTimer(breakTimer);
-			updateCurrentTimerUI(sessionTimer, false);
-			updateCurrentTimerUI(breakTimer, true);
+			setCurrentTimer(sessionTimer, false);
+			setCurrentTimer(breakTimer, true);
 		}
 		else {
 			resetTimer();
@@ -48,8 +46,8 @@ export function timer() {
 		breakTimer = setNewTimer(breakLength, $break);
 		updateTimerUI(sessionTimer);
 		updateTimerUI(breakTimer);
-		updateCurrentTimerUI(sessionTimer, false);
-		updateCurrentTimerUI(breakTimer, false);
+		setCurrentTimer(sessionTimer, false);
+		setCurrentTimer(breakTimer, false);
 	}
 
 	function changeSession(minutes) {
@@ -122,7 +120,7 @@ export function timer() {
 	}
 
 	function updateTimerUI(timer) {
-		const {minutes, seconds} = convertMsToMinsAndSecs(timer.milliseconds);
+		let {minutes, seconds} = convertMsToMinsAndSecs(timer.milliseconds);
 		updateElementUI(timer.minutesElement, minutes);
 		updateElementUI(timer.secondsElement, seconds);
 	}
@@ -131,7 +129,7 @@ export function timer() {
 		timer.timerElement.classList.toggle('timer--running');
 	}
 
-	function updateCurrentTimerUI(timer, boolean) {
-		boolean ? timer.timerElement.classList.add('timer--current') : timer.timerElement.classList.remove('timer--current');
+	function setCurrentTimer(timer, isCurrentTimer) {
+		isCurrentTimer ? timer.timerElement.classList.add('timer--current') : timer.timerElement.classList.remove('timer--current');
 	}
 }

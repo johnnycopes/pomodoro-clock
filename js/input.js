@@ -10,6 +10,17 @@ export function input(timer) {
 	playbackFlowBtn.addEventListener('click', onFlowClick);
 	playbackResetBtn.addEventListener('click', onResetClick);
 
+	return {
+		init
+	};
+
+	// =======================
+
+	function init() {
+		onSessionChange();
+		onBreakChange();
+	}
+
 	// -----------------------
 
 	function onFlowClick() {

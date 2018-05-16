@@ -1,4 +1,4 @@
-# Pomodoro Clock
+# Pomodoro Timer
 
 ### Live site: _coming soon_
 
