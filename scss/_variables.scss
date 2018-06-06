@@ -22,3 +22,23 @@ $edge-spacing: 4vh;
 
 $fast: 100ms all ease-in-out;
 $medium: 250ms all ease-in;
+
+
+// ANIMATIONS
+
+@keyframes gradient-border {
+	0% 	{
+		background-position: 80% 0%;
+		// transform: rotate(0deg);
+	}
+
+  50%	{
+		background-position: 0% 80%;
+		// transform: rotate(300deg);
+	}
+
+  100%	{
+		background-position: 80% 0%;
+		// transform: rotate(15deg);
+	}
+}

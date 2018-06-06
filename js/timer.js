@@ -1,4 +1,5 @@
 export function timer() {
+	const $app = document.querySelector('.app');
 	const $session = document.querySelector('.timer__session');
 	const $break = document.querySelector('.timer__break');
 	const $round = document.querySelector('.timer__round-number');
@@ -89,10 +90,13 @@ export function timer() {
 				toggleFlow();
 			}
 		}, 1000);
+		setBorder(true);
+		
 	}
 
 	function stopTimer(timer) {
 		clearInterval(timer.interval);
+		setBorder(false);
 	}
 
 	function convertMinsToMs(minutes) {
@@ -131,5 +135,9 @@ export function timer() {
 
 	function setCurrentTimer(timer, isCurrentTimer) {
 		isCurrentTimer ? timer.timerElement.classList.add('timer--current') : timer.timerElement.classList.remove('timer--current');
+	}
+
+	function setBorder(isActive) {
+		isActive ? $app.classList.add('app--timer-running') : $app.classList.remove('app--timer-running');
 	}
 }

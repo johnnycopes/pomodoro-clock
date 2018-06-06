@@ -19,16 +19,43 @@ body {
   line-height: 1;
   height: 100vh;
 	position: relative;
+	overflow: hidden;
 }
 
 .app {
+	$border: 1.5vw;
+
 	display: grid;
   grid-template-rows: 25% 50% 25%;
   grid-template-columns: 2fr 1fr;
-  height: 100%;
   align-items: center;
 	justify-items: center;
-	border: $border-width solid $text;
+	position: absolute;
+	background: $background;
+	top: $border;
+	left: $border;
+	width: calc(100vw - (#{$border} * 2));
+	height: calc(100vh - (#{$border} * 2));
+	transform-origin: center;
+
+	&::after {
+		content: '';
+		background: $disabled;
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 100vh;
+		width: 100vw;
+		z-index: -1;
+	}
+	
+	&--timer-running {
+		&::after {
+			animation: gradient-border 10s ease-in alternate infinite;
+			background: linear-gradient(80deg, $text, lighten($text, 40%), darken($text, 20%));
+			background-size: 300% 200%;
+		}
+	}
 	
 	&__icon {
 		position: absolute;
@@ -214,7 +241,7 @@ body {
 
 			&--disabled {
 				cursor: not-allowed;
-				color: $disabled; // TODO: add disabled to colors list
+				color: $disabled;
 
 				&:hover {
 					color: $disabled;
