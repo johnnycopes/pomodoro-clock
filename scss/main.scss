@@ -11,8 +11,8 @@ html {
 }
 
 body {
-  color: $text;
-  background: $background;
+  color: map-get($color, text);
+  background: map-get($color, background);
   font-family: $sans-serif;
 	font-size: 3rem;
 	font-weight: 300;
@@ -20,6 +20,24 @@ body {
   height: 100vh;
 	position: relative;
 	overflow: hidden;
+}
+
+.background {
+	--opacity: 0;
+
+	opacity: var(--opacity);
+	background: map-get($color, disabled);
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100vw;
+	z-index: 0;
+	transition: 1s all ease-in-out;
+	animation: gradient-border 10s ease-in alternate infinite;
+	background: linear-gradient(80deg, map-get($color, text), lighten(map-get($color, text), 40%), darken(map-get($color, text), 20%));
+	background-size: 300% 200%;
+	transition: map-get($transition, medium);
 }
 
 .app {
@@ -31,7 +49,7 @@ body {
   align-items: center;
 	justify-items: center;
 	position: absolute;
-	background: $background;
+	background: map-get($color, background);
 	top: $border;
 	left: $border;
 	width: calc(100vw - (#{$border} * 2));
@@ -40,21 +58,14 @@ body {
 
 	&::after {
 		content: '';
-		background: $disabled;
+		background: map-get($color, disabled);
 		position: fixed;
 		top: 0;
 		left: 0;
 		height: 100vh;
 		width: 100vw;
 		z-index: -1;
-	}
-	
-	&--timer-running {
-		&::after {
-			animation: gradient-border 10s ease-in alternate infinite;
-			background: linear-gradient(80deg, $text, lighten($text, 40%), darken($text, 20%));
-			background-size: 300% 200%;
-		}
+		transition: 1s all ease-in-out;
 	}
 	
 	&__icon {
@@ -64,7 +75,7 @@ body {
 		font-size: 4rem;
 		z-index: 2;
 		opacity: 0.5;
-		transition: $medium;
+		transition: map-get($transition, medium);
 
 		&:hover {
 			opacity: 1;
@@ -87,11 +98,11 @@ body {
 		top: 0;
 		left: 0;
 		z-index: 1;
-		transition: $medium;
+		transition: map-get($transition, medium);
 		transform: translateX(-100%);
 		visibility: hidden;
 		opacity: 0;
-		background: $background;
+		background: map-get($color, background);
 	}
 
 	&__signature {
@@ -101,29 +112,29 @@ body {
 		left: $edge-spacing;
 		bottom: $edge-spacing;
 		font-size: 2rem;
-		color: rgba($text, 0.5);
-		transition: $fast;
+		color: rgba(map-get($color, text), 0.5);
+		transition: map-get($transition, fast);
 		text-decoration: none;
 
 		&:hover {
-			color: $text;
+			color: map-get($color, text);
 		}
 	}
 
   &__input {
     input {
-			color: $text;
+			color: map-get($color, text);
 			font-family: $monospace;
       font-size: 5rem;
       width: 100%;
 			border: 0;
-			transition: $fast;
+			transition: map-get($transition, fast);
 			text-align: center;
 			border-radius: $border-radius;
 
 			&:disabled {
-				background: $disabled;
-				color: darken($disabled, 25%);
+				background: map-get($color, disabled);
+				color: darken(map-get($color, disabled), 25%);
 				cursor: not-allowed;
 			}
     }
@@ -148,10 +159,10 @@ body {
 	grid-column: 1;
 	font-family: $monospace;
 	font-size: 10rem;
-	color: rgba($text, 0.5);
+	color: rgba(map-get($color, text), 0.5);
 	
 	&--current {
-		color: $text;
+		color: map-get($color, text);
 		margin-bottom: 1rem;
 	}
 
@@ -163,7 +174,7 @@ body {
 	&__session,
 	&__break {
 		display: flex;
-		transition: $medium;
+		transition: map-get($transition, medium);
 		padding: 1rem 0;
 	}
 
@@ -210,41 +221,41 @@ body {
     
     &-flow {
 			margin-bottom: 1rem;
-			color: $background;
-			transition: $fast;
+			color: map-get($color, background);
+			transition: map-get($transition, fast);
 			
 			&--start {
-				background: $start;
+				background: map-get($color, start);
 
 				&:hover {
-					background: darken($start, 5%);
+					background: darken(map-get($color, start), 5%);
 				}
 			}
 
 			&--pause {
-				background: $pause;
+				background: map-get($color, pause);
 
 				&:hover {
-					background: darken($pause, 5%);
+					background: darken(map-get($color, pause), 5%);
 				}
 			}
     }
 
     &-reset {
-			color: $text;
-			background: $background;
-			transition: $fast;
+			color: map-get($color, text);
+			background: map-get($color, background);
+			transition: map-get($transition, fast);
 
 			&:hover {
-				color: darken($text, 5%);
+				color: darken(map-get($color, text), 5%);
 			}
 
 			&--disabled {
 				cursor: not-allowed;
-				color: $disabled;
+				color: map-get($color, disabled);
 
 				&:hover {
-					color: $disabled;
+					color: map-get($color, disabled);
 				}
 			}
     }
