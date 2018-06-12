@@ -4,11 +4,17 @@ export function input(timer) {
 	const playbackFlowBtn = document.querySelector('.playback__button-flow');
 	const playbackFlowIcon = document.querySelector('.playback__button-flow-icon')
 	const playbackResetBtn = document.querySelector('.playback__button-reset');
+	const panel = document.querySelector('.panel')
+	const panelContent = document.querySelector('.panel__content');
+	const panelOpenBtn = document.querySelector('.panel__open-panel');
+	const panelCloseBtn = document.querySelector('.panel__close-panel');
 
 	sessionInput.addEventListener('input', onSessionChange);
 	breakInput.addEventListener('input', onBreakChange);
 	playbackFlowBtn.addEventListener('click', onFlowClick);
 	playbackResetBtn.addEventListener('click', onResetClick);
+	panelOpenBtn.addEventListener('click', onOpenPanel);
+	panelCloseBtn.addEventListener('click', onClosePanel);
 
 	return {
 		init
@@ -45,5 +51,19 @@ export function input(timer) {
 	
 	function onBreakChange() {
 		timer.changeBreak(breakInput.value);
+	}
+
+	function onOpenPanel() {
+		panel.classList.add('panel--open');
+		setTimeout(() => {
+			panelContent.classList.add('panel__content--visible');
+		}, 300);
+	};
+
+	function onClosePanel() {
+		panelContent.classList.remove('panel__content--visible');
+		setTimeout(() => {
+			panel.classList.remove('panel--open');
+		}, 100);
 	}
 }

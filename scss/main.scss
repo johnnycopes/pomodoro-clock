@@ -1,13 +1,15 @@
+@import 'mixins';
 @import 'variables';
+
+html {
+	box-sizing: border-box;
+  font-size: 10px;
+}
 
 *,
 *::before,
 *::after {
-	box-sizing: border-box;
-}
-
-html {
-  font-size: 10px;
+	box-sizing: inherit;
 }
 
 body {
@@ -24,7 +26,6 @@ body {
 
 .background {
 	--opacity: 0;
-
 	opacity: var(--opacity);
 	background: map-get($color, disabled);
 	position: fixed;
@@ -32,7 +33,7 @@ body {
 	left: 0;
 	height: 100vh;
 	width: 100vw;
-	z-index: 0;
+	z-index: map-get($z-index, background);
 	transition: 1s all ease-in-out;
 	animation: gradient-border 10s ease-in alternate infinite;
 	background: linear-gradient(80deg, map-get($color, text), lighten(map-get($color, text), 40%), darken(map-get($color, text), 20%));
@@ -40,9 +41,48 @@ body {
 	transition: map-get($transition, medium);
 }
 
-.app {
-	$border: 1.5vw;
+.panel {
+	position: absolute;
+	height: 100vh;
+	width: 100vw;
+	top: 0;
+	left: 0;
+	z-index: map-get($z-index, panel);
+	transition: map-get($transition, medium);
+	transform: translateY(-100%);
+	visibility: hidden;
+	opacity: 0.25;
+	border: $border-width solid map-get($color, text);
+	background: map-get($color, text);
+	color: map-get($color, background);
 
+	&--open {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		transform: translateY(0);
+		visibility: visible;
+		opacity: 1;
+	}
+
+	&__content {
+		margin: 0 auto;
+		width: 70%;
+		max-width: 1050px;
+		opacity: 0;
+		transition: map-get($transition, fast);
+
+		&--visible {
+			opacity: 1;
+		}
+	}
+
+	&__icon {
+		@include icon;
+	}
+}
+
+.app {
 	display: grid;
   grid-template-rows: 25% 50% 25%;
   grid-template-columns: 2fr 1fr;
@@ -50,11 +90,12 @@ body {
 	justify-items: center;
 	position: absolute;
 	background: map-get($color, background);
-	top: $border;
-	left: $border;
-	width: calc(100vw - (#{$border} * 2));
-	height: calc(100vh - (#{$border} * 2));
+	top: $border-width;
+	left: $border-width;
+	width: calc(100vw - (#{$border-width} * 2));
+	height: calc(100vh - (#{$border-width} * 2));
 	transform-origin: center;
+	transition: map-get($transition, medium);
 
 	&::after {
 		content: '';
@@ -64,50 +105,22 @@ body {
 		left: 0;
 		height: 100vh;
 		width: 100vw;
-		z-index: -1;
+		z-index: map-get($z-index, gradient-layer);
 		transition: 1s all ease-in-out;
+	}
+
+	&__open-panel,
+	&__close-panel {
+		cursor: pointer;
 	}
 	
 	&__icon {
-		position: absolute;
-		top: $edge-spacing;
-		left: $edge-spacing;
-		font-size: 4rem;
-		z-index: 2;
-		opacity: 0.5;
-		transition: map-get($transition, medium);
-
-		&:hover {
-			opacity: 1;
-		}
-
-		&:hover ~ .app__panel {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			transform: translateX(0);
-			visibility: visible;
-			opacity: 1;
-		}
-	}
-
-	&__panel {
-		position: absolute;
-		height: 100vh;
-		width: 40vw;
-		top: 0;
-		left: 0;
-		z-index: 1;
-		transition: map-get($transition, medium);
-		transform: translateX(-100%);
-		visibility: hidden;
-		opacity: 0;
-		background: map-get($color, background);
+		@include icon;
 	}
 
 	&__signature {
 		position: absolute;
-		z-index: 1;
+		z-index: map-get($z-index, signature);
 		writing-mode: vertical-lr;
 		left: $edge-spacing;
 		bottom: $edge-spacing;

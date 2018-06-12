@@ -12,16 +12,20 @@
 
 <body>
 	<main class="background"></main>
-	<main class="app">
-		<i class="app__icon fas fa-question"></i>
-		<a class="app__signature" href="http://www.johnnycopes.com/" target="_blank">made by johnnycopes</a>
-		<section class="app__panel">
-			<p>todo:<br>
-				- write copy for this panel<br>
-				- box shadow during panel slide
-				- better authentication for number inputs
+	<main class="panel">
+		<i class="panel__icon panel__close-panel fas fa-times"></i>
+		<div class="panel__content">
+			<p>todo:
+				<br> - write copy for this panel
+				<br> - better authentication for number inputs
+				<br> - refactor SCSS across more files
+				<br> - cross-browser testing
 			</p>
-		</section>
+		</div>
+	</main>
+	<main class="app">
+		<i class="panel__icon panel__open-panel fas fa-question"></i>
+		<a class="app__signature" href="http://www.johnnycopes.com/" target="_blank">made by johnnycopes</a>
 		<section class="title">
 			<h1>Pomodoro Timer</h1>
 		</section>

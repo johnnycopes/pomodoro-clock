@@ -1,0 +1,15 @@
+@import 'variables';
+
+@mixin icon {
+	position: absolute;
+	top: $edge-spacing;
+	left: $edge-spacing;
+	font-size: 4rem;
+	z-index: map-get($z-index, icon);
+	opacity: 0.5;
+	transition: map-get($transition, medium);
+
+	&:hover {
+		opacity: 1;
+	}
+}

@@ -1,6 +1,5 @@
 export function timer() {
 	const $background = document.querySelector('.background');
-	const $app = document.querySelector('.app');
 	const $session = document.querySelector('.timer__session');
 	const $break = document.querySelector('.timer__break');
 	const $round = document.querySelector('.timer__round-number');
@@ -139,7 +138,6 @@ export function timer() {
 	}
 
 	function setBorder(isActive) {
-		// isActive ? $app.classList.add('app--timer-running') : $app.classList.remove('app--timer-running');
 		isActive ? $background.style.setProperty('--opacity', 1) : $background.style.setProperty('--opacity', 0);
 	}
 }

@@ -18,8 +18,15 @@ $sans-serif: 'Scope One', Frutiger, 'Frutiger Linotype', Univers, Calibri, 'Gill
 // STYLES
 
 $border-radius: 8px;
-$border-width: 12px;
+$border-width: 1.5vw;
 $edge-spacing: 4vh;
+$z-index: (
+	gradient-layer: -1,
+	background: 0,
+	signature: 1,
+	icon: 2,
+	panel: 3
+);
 
 
 // TRANSITIONS
