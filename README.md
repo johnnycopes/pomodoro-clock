@@ -14,5 +14,5 @@ To run this locally on your machine, simply clone the repo and enter the followi
 
 ```
 npm install
-npm run start
+npm start
 ```
