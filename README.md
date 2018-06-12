@@ -1,6 +1,6 @@
 # Pomodoro Timer
 
-### Live site: _coming soon_
+### Live site: https://sweet-pomodoro.surge.sh
 
 #### Goals of this project:
 

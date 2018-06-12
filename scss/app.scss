@@ -1,0 +1,86 @@
+@import 'mixins';
+@import 'variables';
+
+.app {
+	display: grid;
+  grid-template-rows: 25% 50% 25%;
+  grid-template-columns: 2fr 1fr;
+  align-items: center;
+	justify-items: center;
+	position: absolute;
+	background: map-get($color, background);
+	top: $border-width;
+	left: $border-width;
+	width: calc(100vw - (#{$border-width} * 2));
+	height: calc(100vh - (#{$border-width} * 2));
+	transform-origin: center;
+	transition: map-get($transition, medium);
+
+	&::after {
+		content: '';
+		background: map-get($color, disabled);
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 100vh;
+		width: 100vw;
+		z-index: map-get($z-index, gradient-layer);
+		transition: 1s all ease-in-out;
+	}
+	
+	&__icon {
+		@include icon;
+	}
+
+	&__signature {
+		position: absolute;
+		z-index: map-get($z-index, signature);
+		writing-mode: vertical-lr;
+		left: $edge-spacing;
+		bottom: $edge-spacing;
+		font-size: 2rem;
+		color: rgba(map-get($color, text), 0.5);
+		transition: map-get($transition, fast);
+		text-decoration: none;
+
+		&:hover {
+			color: map-get($color, text);
+		}
+	}
+
+  &__input {
+    input {
+			color: map-get($color, text);
+			font-family: $monospace;
+      font-size: 5rem;
+      width: 100%;
+			border: 0;
+			transition: map-get($transition, fast);
+			text-align: center;
+			border-radius: $border-radius;
+
+			&:disabled {
+				background: map-get($color, disabled);
+				color: darken(map-get($color, disabled), 25%);
+				cursor: not-allowed;
+			}
+    }
+
+    label {
+			display: block;
+			text-align: center;
+    }
+  }
+}
+
+.title {
+  grid-row: 1;
+  grid-column: 1;
+	font-size: 6rem;
+	font-family: $sans-serif;
+}
+
+.signature {
+  grid-row: 3;
+  grid-column: 1;
+}

@@ -6,8 +6,8 @@ export function input(timer) {
 	const playbackResetBtn = document.querySelector('.playback__button-reset');
 	const panel = document.querySelector('.panel')
 	const panelContent = document.querySelector('.panel__content');
-	const panelOpenBtn = document.querySelector('.panel__open-panel');
-	const panelCloseBtn = document.querySelector('.panel__close-panel');
+	const panelOpenBtn = document.querySelector('#open-panel');
+	const panelCloseBtn = document.querySelector('#close-panel');
 
 	sessionInput.addEventListener('input', onSessionChange);
 	breakInput.addEventListener('input', onBreakChange);

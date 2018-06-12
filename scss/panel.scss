@@ -1,0 +1,43 @@
+@import 'mixins';
+@import 'variables';
+
+.panel {
+	position: absolute;
+	height: 100vh;
+	width: 100vw;
+	top: 0;
+	left: 0;
+	z-index: map-get($z-index, panel);
+	transition: map-get($transition, medium);
+	transform: translateY(-100%);
+	visibility: hidden;
+	opacity: 0.25;
+	border: $border-width solid map-get($color, text);
+	background: map-get($color, text);
+	color: map-get($color, background);
+
+	&--open {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		transform: translateY(0);
+		visibility: visible;
+		opacity: 1;
+	}
+
+	&__content {
+		margin: 0 auto;
+		width: 70%;
+		max-width: 1050px;
+		opacity: 0;
+		transition: map-get($transition, fast);
+
+		&--visible {
+			opacity: 1;
+		}
+	}
+
+	&__icon {
+		@include icon;
+	}
+}
